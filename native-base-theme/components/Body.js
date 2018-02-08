@@ -1,9 +1,11 @@
-export default () => {
-  const bodyTheme = {
-    flex: 1,
-    alignItems: 'center',
-    alignSelf: 'center',
-  };
+const Body = () => {
+	const bodyTheme = {
+		flex: 1,
+		alignItems: 'center',
+		alignSelf: 'center',
+	};
 
-  return bodyTheme;
+	return bodyTheme;
 };
+
+export default Body;

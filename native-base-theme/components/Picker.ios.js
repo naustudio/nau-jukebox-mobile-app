@@ -1,5 +1,7 @@
-export default () => {
-  const pickerTheme = {};
+const Picker = () => {
+	const pickerTheme = {};
 
-  return pickerTheme;
+	return pickerTheme;
 };
+
+export default Picker;

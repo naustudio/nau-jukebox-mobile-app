@@ -1,7 +1,9 @@
-export default () => {
-  const spinnerTheme = {
-    height: 80,
-  };
+const Spinner = () => {
+	const spinnerTheme = {
+		height: 80,
+	};
 
-  return spinnerTheme;
+	return spinnerTheme;
 };
+
+export default Spinner;

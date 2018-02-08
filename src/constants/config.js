@@ -1,12 +1,14 @@
-const devMode = (process.env.NODE_ENV !== 'development');
+const devMode = process.env.NODE_ENV !== 'development';
 
-export default {
-  // App Details
-  appName: 'Starter Kit',
+const config = {
+	// App Details
+	appName: 'Nau Jukebox',
 
-  // Build Configuration - eg. Debug or Release?
-  DEV: devMode,
+	// Build Configuration - eg. Debug or Release?
+	DEV: devMode,
 
-  // Google Analytics - uses a 'dev' account while we're testing
-  gaTrackingId: (devMode) ? 'UA-84284256-2' : 'UA-84284256-1',
+	// Google Analytics - uses a 'dev' account while we're testing
+	gaTrackingId: devMode ? 'UA-XXXXXXXX-2' : 'UA-XXXXXXXX-1',
 };
+
+export default config;

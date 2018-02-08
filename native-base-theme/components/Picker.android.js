@@ -1,11 +1,13 @@
-export default () => {
-  const pickerTheme = {
-    '.note': {
-      color: '#8F8E95',
-    },
-    width: 90,
-    marginRight: -4,
-  };
+const Picker = () => {
+	const pickerTheme = {
+		'.note': {
+			color: '#8F8E95',
+		},
+		width: 90,
+		marginRight: -4,
+	};
 
-  return pickerTheme;
+	return pickerTheme;
 };
+
+export default Picker;

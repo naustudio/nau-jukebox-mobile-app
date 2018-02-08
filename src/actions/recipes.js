@@ -1,89 +1,104 @@
 import { Firebase, FirebaseRef } from '../lib/firebase';
 
 /**
-  * Get this User's Favourite Recipes
-  */
+ * Get this User's Favourite Recipes
+ */
 export function getFavourites(dispatch) {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
+	if (Firebase === null) return () => new Promise(resolve => resolve());
 
-  const UID = Firebase.auth().currentUser.uid;
-  if (!UID) return false;
+	const UID = Firebase.auth().currentUser.uid;
+	if (!UID) return false;
 
-  const ref = FirebaseRef.child(`favourites/${UID}`);
+	const ref = FirebaseRef.child(`favourites/${UID}`);
 
-  return ref.on('value', (snapshot) => {
-    const favs = snapshot.val() || [];
+	return ref.on('value', snapshot => {
+		const favs = snapshot.val() || [];
 
-    return dispatch({
-      type: 'FAVOURITES_REPLACE',
-      data: favs,
-    });
-  });
+		return dispatch({
+			type: 'FAVOURITES_REPLACE',
+			data: favs,
+		});
+	});
 }
 
 /**
-  * Reset a User's Favourite Recipes in Redux (eg for logou)
-  */
+ * Reset a User's Favourite Recipes in Redux (eg for logou)
+ */
 export function resetFavourites(dispatch) {
-  return dispatch({
-    type: 'FAVOURITES_REPLACE',
-    data: [],
-  });
+	return dispatch({
+		type: 'FAVOURITES_REPLACE',
+		data: [],
+	});
 }
 
 /**
-  * Update My Favourites Recipes
-  */
+ * Update My Favourites Recipes
+ */
 export function replaceFavourites(newFavourites) {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
+	if (Firebase === null) return () => new Promise(resolve => resolve());
 
-  const UID = Firebase.auth().currentUser.uid;
-  if (!UID) return false;
+	const UID = Firebase.auth().currentUser.uid;
+	if (!UID) return false;
 
-  return () => FirebaseRef.child(`favourites/${UID}`).set(newFavourites);
+	return () => FirebaseRef.child(`favourites/${UID}`).set(newFavourites);
 }
 
 /**
-  * Get Meals
-  */
+ * Get Meals
+ */
 export function getMeals() {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
+	if (Firebase === null) return () => new Promise(resolve => resolve());
 
-  return dispatch => new Promise((resolve, reject) => FirebaseRef
-    .child('meals').once('value')
-    .then((snapshot) => {
-      const meals = snapshot.val() || {};
+	return dispatch =>
+		new Promise((resolve, reject) =>
+			FirebaseRef.child('meals')
+				.once('value')
+				.then(snapshot => {
+					const meals = snapshot.val() || {};
 
-      return resolve(dispatch({
-        type: 'MEALS_REPLACE',
-        data: meals,
-      }));
-    }).catch(reject)).catch(e => console.log(e));
+					return resolve(
+						dispatch({
+							type: 'MEALS_REPLACE',
+							data: meals,
+						})
+					);
+				})
+				.catch(reject)
+		).catch(e => console.log(e));
 }
 
 /**
-  * Set an Error Message
-  */
+ * Set an Error Message
+ */
 export function setError(message) {
-  return dispatch => new Promise(resolve => resolve(dispatch({
-    type: 'RECIPES_ERROR',
-    data: message,
-  })));
+	return dispatch =>
+		new Promise(resolve =>
+			resolve(
+				dispatch({
+					type: 'RECIPES_ERROR',
+					data: message,
+				})
+			)
+		);
 }
 
 /**
-  * Get Recipes
-  */
+ * Get Recipes
+ */
 export function getRecipes() {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
+	if (Firebase === null) return () => new Promise(resolve => resolve());
 
-  return dispatch => new Promise(resolve => FirebaseRef.child('recipes')
-    .on('value', (snapshot) => {
-      const recipes = snapshot.val() || {};
+	return dispatch =>
+		new Promise(resolve =>
+			FirebaseRef.child('recipes').on('value', snapshot => {
+				const recipes = snapshot.val() || {};
 
-      return resolve(dispatch({
-        type: 'RECIPES_REPLACE',
-        data: recipes,
-      }));
-    })).catch(e => console.log(e));
+				return resolve(
+					dispatch({
+						type: 'RECIPES_REPLACE',
+						data: recipes,
+					})
+				);
+			})
+		).catch(e => console.log(e));
 }

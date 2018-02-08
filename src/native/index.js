@@ -16,25 +16,20 @@ import Loading from './components/Loading';
 if (Platform.OS === 'android') StatusBar.setHidden(true);
 
 const Root = ({ store, persistor }) => (
-  <Provider store={store}>
-    <PersistGate
-      loading={<Loading />}
-      persistor={persistor}
-    >
-      <StyleProvider style={getTheme(theme)}>
-        <Router>
-          <Stack key="root">
-            {Routes}
-          </Stack>
-        </Router>
-      </StyleProvider>
-    </PersistGate>
-  </Provider>
+	<Provider store={store}>
+		<PersistGate loading={<Loading />} persistor={persistor}>
+			<StyleProvider style={getTheme(theme)}>
+				<Router>
+					<Stack key="root">{Routes}</Stack>
+				</Router>
+			</StyleProvider>
+		</PersistGate>
+	</Provider>
 );
 
 Root.propTypes = {
-  store: PropTypes.shape({}).isRequired,
-  persistor: PropTypes.shape({}).isRequired,
+	store: PropTypes.shape({}).isRequired,
+	persistor: PropTypes.shape({}).isRequired,
 };
 
 export default Root;

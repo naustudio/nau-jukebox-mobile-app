@@ -1,7 +1,9 @@
-export default () => {
-  const switchTheme = {
-    marginVertical: -5,
-  };
+const Switch = () => {
+	const switchTheme = {
+		marginVertical: -5,
+	};
 
-  return switchTheme;
+	return switchTheme;
 };
+
+export default Switch;
